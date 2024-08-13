@@ -90,7 +90,7 @@ class SugarGlider extends Animal{
     }
     speak(){
         super.speak()
-        console.log(`${this.name} screeched so loud your ears fell off`)
+        console.log(`${this.name} flew ${this._flightDistance} feet, then screeched so loud your ears fell off`)
     }
 }
 
@@ -99,7 +99,7 @@ let machi = new Dog('The Machine','Pitbull')
 let salem = new Cat('Salem', 'American Shorthair')
 let luna = new SugarGlider('Luna', 160)
 
-let farm = [simba,machi,salem, luna]
+let farm = [simba, machi, salem, luna]
 
 console.log(farm)
 
