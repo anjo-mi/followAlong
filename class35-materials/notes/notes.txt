@@ -126,3 +126,16 @@ Node.js
         - fs: files system access
     - under the hood: C/C++ is being used to access the things JS normally can't, and prepares them for JS to use
     
+
+
+    ///////////////////////////////////////////////////////////
+    CLASS 36
+
+Queue
+    - operates as a first in first out data structure
+        - similar to an array being filled, then one at a time unshifted
+
+Stack
+    - operates as a last in first out (first in last out) data structure
+        - similar to an array being filled, then one at a time popped
+    

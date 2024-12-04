@@ -147,7 +147,7 @@ async function getACuteDogPhoto(){
         document.querySelector('.dog').src = data.message
         console.log(data)
     }catch(err){
-        console.log(err)
+        console.log(`you blew it: ${err}`)
     }
 }
 getACuteDogPhoto()
