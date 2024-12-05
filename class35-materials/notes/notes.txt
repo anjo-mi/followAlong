@@ -139,3 +139,31 @@ Stack
     - operates as a last in first out (first in last out) data structure
         - similar to an array being filled, then one at a time popped
     
+Event Loop
+    - follows a path through environment/browser
+        - call stack
+            - always contains main() - function will only be cleared when the entire call stack is emptied (ie there is no more synchronous code to be parsed)
+            - takes commands written from DOM [ console.log(1) ]
+                - since its the last in : it will be the first thing 'popped' out
+                    - in the example since theres nothing in the web APIs nor task queue, it goes to the console
+            - after 1 is console.logged, the next part of code is read from DOM [ setTimeout() ]
+                - setTimeout() cant be used in javaScript since it JS wont wait for it
+                    - it 'carries it over' to the web APIs and 'drops it off' to be checked on next loop **see web API's for handling
+            - after setTimeout() is placed in task queue, next part of code is placed in call stack [ console.log(3) ]
+                - since console.log(3) is now the last in the stack, its taken first with event loop
+                    - and brought to the console
+                        - anything in the task queue is left alone if there are 'passengers' from call stack
+            - now that the call stack has been cleared (main() is gone when synchronous code is finished)
+                - event loop checks for more passengers after task queue
+                    - finds the setTimeout() in the task queue (or first of many)
+                        - brings it to the call stack
+            - since the promise returned from setTimeout() is last thing into the call stack
+                - it is the first thing taken out by the event loop
+        - web APIs
+            - will process the web API and send it to the task queue when its ready (event loop can continue running)
+        - task queue (job queue)
+            - stores web APIs (and prolly other shit too) when they are ready to be returned
+                - wait patiently for call stack to be emptied (void of even main())
+                    - at that time fills stack with resolved promises to be taken - one at a time
+        - console
+        - restarts with call stack
