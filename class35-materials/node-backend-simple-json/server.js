@@ -1,5 +1,6 @@
 const http = require('http');
 const fs = require('fs')
+const path = require('path')
 const url = require('url');
 const querystring = require('querystring');
 const figlet = require('figlet')
@@ -11,6 +12,7 @@ const server = http.createServer((req, res) => {
 
 
   const params = querystring.parse(url.parse(req.url).query);
+  console.log(path.join(__dirname));
   console.log(page);
   
   // if the page is localhost:8000/
@@ -79,8 +81,14 @@ const server = http.createServer((req, res) => {
       res.end();
     });
 
+  // dont send 404 errors for favicon requests
+  }else if (page == '/favicon.ico'){
+    res.write('204');
+    res.end();
+  }
+  
   // if none of the requests above exist, send the 404 error, using figlet to make it look pretty
-  }else{
+  else{
     figlet('404!!', function(err, data) {
       if (err) {
           console.log('Something went wrong...');
