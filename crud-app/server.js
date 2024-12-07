@@ -1,5 +1,8 @@
 const express = require('express')
 const app = express()
+const MongoClient = require('mongodb').MongoClient
+
+MongoClient.connect('mongodb+srv://nojaimk:N**buf52@cluster0.vi3kp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0').then(console.log('connected')).catch(err => console.log(err))
 
 app.use(express.urlencoded({extended: true}))
 
