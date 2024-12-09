@@ -12,6 +12,8 @@ MongoClient.connect(connectionString)
         const db = client.db('crud-app')
         // use the database variable to create a variable with access to a 'collection'
         const quotes = db.collection('quotesForCollection')
+
+        app.set('view engine', 'ejs')
         
         app.use(express.urlencoded({extended: true}))
         
@@ -20,6 +22,10 @@ MongoClient.connect(connectionString)
         })
         
         app.get('/', (req, res) => {
+            const cursor = quotes.find().toArray().then(results => {
+                console.log(results)
+            })
+            .catch(err => console.log(err))
             res.sendFile(__dirname + '/index.html')
         })
         
