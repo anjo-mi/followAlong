@@ -2,19 +2,39 @@ const express = require('express')
 const app = express()
 const MongoClient = require('mongodb').MongoClient
 
-MongoClient.connect('mongodb+srv://nojaimk:N**buf52@cluster0.vi3kp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0').then(console.log('connected')).catch(err => console.log(err))
+const connectionString = 'mongodb+srv://nojaimk:N**buf52@cluster0.vi3kp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 
-app.use(express.urlencoded({extended: true}))
+MongoClient.connect(connectionString)
+    .then((client) => {
+        console.log('connected')
 
-app.listen(3000, (req,res) => {
-    console.log('express yourself')
-})
+        // create a variable that has access to the database
+        const db = client.db('crud-app')
+        // use the database variable to create a variable with access to a 'collection'
+        const quotes = db.collection('quotesForCollection')
+        
+        app.use(express.urlencoded({extended: true}))
+        
+        app.listen(3000, () => {
+            console.log('express yourself')
+        })
+        
+        app.get('/', (req, res) => {
+            res.sendFile(__dirname + '/index.html')
+        })
+        
+        app.post('/quotes', (req, res) => {
+            console.log(req.body)
+            quotes.insertOne(req.body)
+                .then(result => {
+                    console.log(result)
+                    res.redirect('/')
+                })
+                .catch(err => console.log(err))
+        })
+        
+    })
+    .catch(err => console.log(err))
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html')
-})
 
-app.post('/quotes', (req, res) => {
-    console.log(req.body)
-})
 console.log('node way')
