@@ -13,6 +13,9 @@ MongoClient.connect(connectionString)
         // use the database variable to create a variable with access to a 'collection'
         const quotes = db.collection('quotesForCollection')
 
+
+        // after installing ejs, make sure the app is set to use it, view engine is required for first argument in order to use ejs to render html
+        // this is used w res.render inside app.gethtml
         app.set('view engine', 'ejs')
         
         app.use(express.urlencoded({extended: true}))
@@ -24,9 +27,10 @@ MongoClient.connect(connectionString)
         app.get('/', (req, res) => {
             const cursor = quotes.find().toArray().then(results => {
                 console.log(results)
+                res.render('index.ejs', {quotes: results})
             })
             .catch(err => console.log(err))
-            res.sendFile(__dirname + '/index.html')
+            // res.sendFile(__dirname + '/index.html')
         })
         
         app.post('/quotes', (req, res) => {
