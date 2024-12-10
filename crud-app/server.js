@@ -20,6 +20,10 @@ MongoClient.connect(connectionString)
         
         app.use(express.urlencoded({extended: true}))
         
+        app.use(express.static('public'))
+
+        app.use(express.json())
+        
         app.listen(3000, () => {
             console.log('express yourself')
         })
@@ -34,13 +38,32 @@ MongoClient.connect(connectionString)
         })
         
         app.post('/quotes', (req, res) => {
-            console.log(req.body)
             quotes.insertOne(req.body)
                 .then(result => {
                     console.log(result)
                     res.redirect('/')
                 })
                 .catch(err => console.log(err))
+        })
+
+        app.put('/quotes', (req,res) => {
+            quotes.findOneAndUpdate(
+                {name: 'butt'},
+                {
+                    $set: {
+                        name: req.body.name,
+                        quote: req.body.quote,
+                    },
+                },
+                {
+                    upsert: true
+                }
+            ).then(result => {
+                res.json('success')
+            }).catch(err => {
+                console.log(err)
+                res.status(500).json({status: 'error'})
+            })
         })
         
     })
