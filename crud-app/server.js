@@ -55,15 +55,26 @@ MongoClient.connect(connectionString)
                         quote: req.body.quote,
                     },
                 },
-                {
-                    upsert: true
-                }
+                // {
+                //     upsert: true
+                // }
             ).then(result => {
                 res.json('success')
             }).catch(err => {
                 console.log(err)
                 res.status(500).json({status: 'error'})
             })
+        })
+
+        app.delete('/quotes', (req, res) => {
+            quotes.deleteOne({name : req.body.name},)
+                .then(result => {
+                    if (result.deletedCount === 0) {
+                        return res.json('you could eat off it')
+                    }
+                    res.json('the poop is gone')
+                })
+                .catch(err => console.log(err))
         })
         
     })
