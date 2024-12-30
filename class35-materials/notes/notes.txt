@@ -1,0 +1,169 @@
+DONT STRESS NETWORKING!! open the doors you can!
+
+DOM is a web API, not actually processed on your computer
+- the browser takes the async code and sends it off to be evaluated
+    - querySelector and the sort are not actually javaScript!!!!!
+    - browser sends back the results of the call asynchronously so you can keep moving on webpage
+        - this is done w/
+            - call stacks
+            - call back queue
+            - web api
+            - event loop
+************************************************
+function houseOne(){
+    console.log('Paper delivered to house 1')
+}
+function houseTwo(callback){
+    setTimeout(() => {
+        console.log('Paper delivered to house 2')
+        callback()
+    }, 3000)
+}
+function houseThree(){
+    console.log('Paper delivered to house 3')
+}
+houseOne()
+houseTwo(houseThree)
+
+in this example, house three is the callback function, only operated after the set setTimeout
+    - a callback function does not have to refer to the function that called it!!!!!!!!!!!1
+    - event loop executes running synchronous code
+        - since the setTimeout contains the call of houseThree (as its callback)
+            - synchronous code ends with house two call, event loop moves to task queue
+                - task queue contains setTimeout's result (including call of house three) is ran
+
+************************************************
+
+
+document.querySelector('button').addEventListener('click', funkyShun)
+    - first example i saw of a callback function (funkyshun does not require parentheses since it is a parameter of addEvLis)
+    - imagine the event listener method creation
+        class Node{
+            constructor(){
+                this.whatever = something
+            }
+            querySelector(string){
+                if (string === 'button'){
+                    return document./idk something to get the specific tags/
+                }
+            }
+            addEventListener(action, callback){
+                if (action has been performed){
+                    callback()      *********this is where the parentheses are used because this is where the call of whatever function is desired
+                }
+                ****** funkyshun is used as an argument, then evaluated in line 52 taking the place of callback - funkyshun()
+            }
+        }
+
+
+
+
+PROMISES - act as 'placeholder' - are essentially an object that ****MAY**** have a value in the future
+
+
+const promise = new Promise((resolve, reject) => {
+    const error = false
+    if(!error){
+        resolve('Promise has been fullfilled')
+    }else{
+        reject('Error: Operation has failed')
+    }
+})
+console.log(promise)
+promise
+    .then(data => console.log(data)) // runs the resolve if no error
+    .catch(err => console.log(err)) // runs the reject if error
+
+
+
+    - have three states they can be in
+        - pending : initial state of the object - hasnt completed its request / waiting for response
+        - fulfilled : request was sent AND response returned successfully, obj now has a value
+        - rejected : request was sent AND/OR response returned unsuccesfully, obj now has a value marking it as rejected
+    - has methods of .then and .catch
+        - .then will only be ran after checking to make sure an error hasnt been encountered (status is fulfilled)
+            - seems to take the place of resolve callback inside Promise creation
+        - .catch will only be ran if an error has been encountered (status is rejected)
+            - seems to take the place of reject callback inside Promise creation
+
+
+
+ASYNC/AWAIT
+    - syntactical sugar to make asynchronous code look like synchronous javaScript
+    - awaits must be called inside async functions
+        - can use try/catch - prolly the better way
+
+
+
+
+javaScript 'sandbox'
+    - js is contained to the area in which it can do things
+        - does not have access to files on the computer, can use the tools provided by the browser
+            - can only do the things that the hosting environment allows
+                - web API's (DOM, fetch, etc...)
+        - any escapes from the 'sandbox' are called zero-day exploits
+    - **ESSENTIALLY js does not have access to the things it needs to run smoothly or be powerful, but Node.js does, and can provide it for JS when its ran in that environment
+
+
+SERVERS
+    - servers serve information (files) from storage (hard drive, SSD [they exist somewhere])
+        - hears requests for files and responds to them
+            - needs access to the internet
+            - needs access to the disks (or storage containing information)
+                - because of these access requirements, JS needs a hosting environment that has that access
+                    - BOOOOOOOOOOMMMMMMM Node.js BOOOOOOOOOOOOMMMMMMMMM
+
+
+
+Node.js
+    - JS runtime built on Chrome's V8 JS engine
+        - 'the same shit that lets you runs JS in the browser, can now be used to run JS on servers, desktops or elsewhere'
+        - node is an environment built on the same stuff that enables JS in the browser
+        - V8 engine is what takes the language received (JS in this case), and breaks it down into binary the computer can use to perform the operations
+            - instead of now just doing it for the broswer, it also does it for node
+    - node has a bunch of built in modules (also: path, os, url, event)
+        - http: network access
+        - fs: files system access
+    - under the hood: C/C++ is being used to access the things JS normally can't, and prepares them for JS to use
+    
+
+
+    ///////////////////////////////////////////////////////////
+    CLASS 36
+
+Queue
+    - operates as a first in first out data structure
+        - similar to an array being filled, then one at a time unshifted
+
+Stack
+    - operates as a last in first out (first in last out) data structure
+        - similar to an array being filled, then one at a time popped
+    
+Event Loop
+    - follows a path through environment/browser
+        - call stack
+            - always contains main() - function will only be cleared when the entire call stack is emptied (ie there is no more synchronous code to be parsed)
+            - takes commands written from DOM [ console.log(1) ]
+                - since its the last in : it will be the first thing 'popped' out
+                    - in the example since theres nothing in the web APIs nor task queue, it goes to the console
+            - after 1 is console.logged, the next part of code is read from DOM [ setTimeout() ]
+                - setTimeout() cant be used in javaScript since it JS wont wait for it
+                    - it 'carries it over' to the web APIs and 'drops it off' to be checked on next loop **see web API's for handling
+            - after setTimeout() is placed in task queue, next part of code is placed in call stack [ console.log(3) ]
+                - since console.log(3) is now the last in the stack, its taken first with event loop
+                    - and brought to the console
+                        - anything in the task queue is left alone if there are 'passengers' from call stack
+            - now that the call stack has been cleared (main() is gone when synchronous code is finished)
+                - event loop checks for more passengers after task queue
+                    - finds the setTimeout() in the task queue (or first of many)
+                        - brings it to the call stack
+            - since the promise returned from setTimeout() is last thing into the call stack
+                - it is the first thing taken out by the event loop
+        - web APIs
+            - will process the web API and send it to the task queue when its ready (event loop can continue running)
+        - task queue (job queue)
+            - stores web APIs (and prolly other shit too) when they are ready to be returned
+                - wait patiently for call stack to be emptied (void of even main())
+                    - at that time fills stack with resolved promises to be taken - one at a time
+        - console
+        - restarts with call stack
