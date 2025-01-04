@@ -1,55 +1,41 @@
 body{
-    background: grey;
+    background: green;
 }
 
 .sprite-one{
     width: 63px;
     height: 79px;
-    border: 1px solid black;
     background-image: url('/sprites/brook-trans.png');
     background-size: auto;
     background-position: -3px -112px;
-    /* transition: opacity 0.05s ease;
-    background-color: transparent;
-    mix-blend-mode: color-dodge; */
 }
 
 
 .sprite-two{
     width: 121px;
     height: 71px;
-    border: 1px solid black;
     background-image: url('/sprites/brook-trans.png');
     background-size: auto;
     background-position: -152px -120px;
-    /* transition: opacity 0.05s ease;
-    background-color: transparent;
-    mix-blend-mode: color-dodge; */
 }
 
 
 .sprite-three{
     width: 97px;
     height: 79px;
-    border: 1px solid black;
     background-image: url('/sprites/brook-trans.png');
     background-size: auto;
     background-position: -897px -112px;
-    /* transition: opacity 0.05s ease;
-    background-color: transparent;
-    mix-blend-mode: color-dodge; */
+
 }
 
 .sprite-four{
     width: 36px;
     height: 88px;
-    border: 1px solid black;
     background-image: url('/sprites/brook-trans.png');
     background-size: auto;
     background-position: -1010px -103px;
-    /* transition: opacity 0.05s ease;
-    background-color: transparent;
-    mix-blend-mode: color-dodge; */
+
 }
 
 /* .sprite-grid::after{

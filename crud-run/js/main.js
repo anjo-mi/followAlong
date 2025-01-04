@@ -1,5 +1,5 @@
 function cycleSprites(){
-    const sprite = document.getElementById('brook-sprite');
+    const sprite = document.getElementById('sprite');
     let currentIndex = 0;
     const spriteStates = [
         {class: 'sprite-one', position: '-3px -112px'},
@@ -19,7 +19,7 @@ function cycleSprites(){
 
             currentIndex = (currentIndex + 1) % spriteStates.length;
         },150);
-    }, 700)
+    }, 400)
 }
 
 document.addEventListener('DOMContentLoaded', cycleSprites);

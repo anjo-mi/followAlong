@@ -4,13 +4,14 @@ const port = 3000;
 const cors = require('cors');
 
 class Theme{
-    constructor(name, image, strength, weakness, sprite, weapon){
+    constructor(name, image, strength, weakness, sprite, weapon, states){
         this.name = name;
         this.image = image;
         this.strength = strength;
         this.weakness = weakness;
         this.sprite = sprite;
         this.weapon = weapon;
+        this.states = states;
     }
 
     addTheme(){
@@ -80,15 +81,27 @@ const chopper = new Theme('Tony Tony Chopper',
                         '/images/chopper.png', 
                         ['medicine', 'kind-hearted', 'transformative'], 
                         ['scares easily', 'cotton candy'], 
-                        'sprites/chopper.png', 
-                        'Rumble Balls').addTheme();
+                        'sprites/chopper-trans.png', 
+                        'Rumble Balls',
+                        [
+                            {class: 'sprite-one', position: '-160px -2106px', height: '60px', width: '75px'},
+                            {class: 'sprite-two', position: '-236px -2096px', height: '62px', width: '120px'},
+                            {class: 'sprite-three', position: '-357px -2096px', height: '62px', width: '114px'},
+                            {class: 'sprite-four', position: '-472px -2103px', height: '62px', width: '93px'}
+                        ]).addTheme();
 
 const brook = new Theme('Soul King Brook', 
                         '/images/brook.jpg', 
                         ['singing', 'entertainment', 'swordplay'], 
                         ['0 grace', 'scares easily'], 
-                        'sprites/brook.png', 
-                        'Shikomizue and Music').addTheme();
+                        'sprites/brook-trans.png', 
+                        'Shikomizue and Music'
+                        [
+                            {class: 'sprite-one', position: '-3px -112px', height: '79px', width: '63px'},
+                            {class: 'sprite-two', position: '-152px -120px', height: '71px', width: '121px'},
+                            {class: 'sprite-three', position: '-897px -112px', height: '79px', width: '97px'},
+                            {class: 'sprite-four', position: '-1010px -103px', height: '88px', width: '36px'}
+                        ]).addTheme();
 
 app.use(cors());
 
