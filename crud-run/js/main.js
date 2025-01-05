@@ -34,4 +34,4 @@ async function getSelection(e){
     }
 }
 
-document.addEventListener('DOMContentLoaded', cycleSprites);
+// document.addEventListener('DOMContentLoaded', cycleSprites);
