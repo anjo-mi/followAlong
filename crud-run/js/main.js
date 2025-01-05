@@ -1,25 +1,37 @@
-function cycleSprites(){
-    const sprite = document.getElementById('sprite');
-    let currentIndex = 0;
-    const spriteStates = [
-        {class: 'sprite-one', position: '-3px -112px'},
-        {class: 'sprite-two', position: '-152px -120px'},
-        {class: 'sprite-three', position: '-897px -112px'},
-        {class: 'sprite-four', position: '-1010px -103px'},
-    ];
+document.querySelectorAll('.option').forEach(option => {
+    option.addEventListener('click', getSelection)
+});
 
-    setInterval(() => {
-        sprite.style.opacity = '0';
 
-        setTimeout(() => {
+async function getSelection(e){
+    e.preventDefault();
+    const selection = e.target.getAttribute('name')
+    try{
+        const res = await fetch(`/api/${selection}`);
+        const data = await res.json();
 
-            sprite.className = spriteStates[currentIndex].class;
-            sprite.style.backgroundPosition = spriteStates[currentIndex].position;
-            sprite.style.opacity = '1';
+        const sprite = document.getElementById('sprite');
+        let currentIndex = 0;
+        const spriteStates = data.states
 
-            currentIndex = (currentIndex + 1) % spriteStates.length;
-        },150);
-    }, 400)
+        setInterval(() => {
+            sprite.style.opacity = '0';
+
+            setTimeout(() => {
+
+                sprite.className = spriteStates[currentIndex].class;
+                sprite.style.backgroundPosition = spriteStates[currentIndex].position;
+                sprite.style.height = spriteStates[currentIndex].height;
+                sprite.style.width = spriteStates[currentIndex].width;
+                sprite.style.opacity = '1';
+
+                currentIndex = (currentIndex + 1) % spriteStates.length;
+            },150);
+        }, 400)
+    }
+    catch(e){
+        console.log(e);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', cycleSprites);
