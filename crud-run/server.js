@@ -106,10 +106,10 @@ const jimbei = new Theme('Jimbei',
                         'sprites/jimbei-trans.png', 
                         'Fish-Man Karate',
                         [
-                            {class: 'sprite-one', position: '-160px -2106px', height: '60px', width: '75px'},
-                            {class: 'sprite-two', position: '-236px -2096px', height: '62px', width: '120px'},
-                            {class: 'sprite-three', position: '-357px -2096px', height: '62px', width: '114px'},
-                            {class: 'sprite-four', position: '-472px -2103px', height: '62px', width: '93px'}
+                            {class: 'sprite-one', position: '-172px -281px', height: '69px', width: '81px'},
+                            {class: 'sprite-two', position: '-265px -279px', height: '71px', width: '101px'},
+                            {class: 'sprite-three', position: '-612px -279px', height: '71px', width: '94px'},
+                            {class: 'sprite-four', position: '-923px -275px', height: '75px', width: '75px'}
                         ]).addTheme();
 
 const franky = new Theme('Cyborg Franky', 
