@@ -53,29 +53,53 @@ const robin = new Theme('Nico Robin',
                         '/images/robin.jpg', 
                         ['determination', 'survivor', 'knowledge of ancient history'], 
                         ['feels undeserving', 'long-wanted by the marines'], 
-                        'sprites/robin.png', 
-                        'Flower Flower Fruit').addTheme();
+                        'sprites/robin-trans.png', 
+                        'Flower Flower Fruit'
+                        [
+                            {class: 'sprite-one', position: '-14px -964px', height: '65px', width: '36px'},
+                            {class: 'sprite-two', position: '-119px -951px', height: '78px', width: '39px'},
+                            {class: 'sprite-three', position: '-172px -958px', height: '72px', width: '89px'},
+                            {class: 'sprite-four', position: '-470px -965px', height: '65px', width: '44px'}
+                        ]).addTheme();
 
 const nami = new Theme('Nami', 
                         '/images/nami.webp', 
                         ['survivor', 'eye for profit', 'navigation'], 
                         ['greed', 'self-interest'], 
-                        'sprites/nami.png', 
-                        'Clima-Tact').addTheme();
+                        'sprites/nami-trans.png', 
+                        'Clima-Tact'
+                        [
+                            {class: 'sprite-one', position: '-529px -102px', height: '70px', width: '37px'},
+                            {class: 'sprite-two', position: '-140px -87px', height: '85px', width: '105px'},
+                            {class: 'sprite-three', position: '-250px -100px', height: '72px', width: '108px'},
+                            {class: 'sprite-four', position: '-363px -117px', height: '55px', width: '92px'}
+                        ]).addTheme();
 
 const jimbei = new Theme('Jimbei', 
                         '/images/jimbei.webp', 
                         ['honor', 'fish-man', 'jujutsu'], 
                         ['honor-bound', 'loyal to many'], 
-                        'sprites/jimbei.png', 
-                        'Fish-Man Karate').addTheme();
+                        'sprites/jimbei-trans.png', 
+                        'Fish-Man Karate',
+                        [
+                            {class: 'sprite-one', position: '-160px -2106px', height: '60px', width: '75px'},
+                            {class: 'sprite-two', position: '-236px -2096px', height: '62px', width: '120px'},
+                            {class: 'sprite-three', position: '-357px -2096px', height: '62px', width: '114px'},
+                            {class: 'sprite-four', position: '-472px -2103px', height: '62px', width: '93px'}
+                        ]).addTheme();
 
 const franky = new Theme('Cyborg Franky', 
                         '/images/franky.webp', 
                         ['mechanic', 'shipwrite', 'kind-hearted'], 
                         ['childish', 'aloofness'], 
-                        'sprites/franky.png', 
-                        `He's a cyborg`).addTheme();
+                        'sprites/franky-trans.png', 
+                        `He's a cyborg`
+                        [
+                            {class: 'sprite-one', position: '-111px -376px', height: '73px', width: '103px'},
+                            {class: 'sprite-two', position: '-219px -390px', height: '59px', width: '96px'},
+                            {class: 'sprite-three', position: '-320px -388px', height: '61px', width: '109px'},
+                            {class: 'sprite-four', position: '-676px -378px', height: '71px', width: '58px'}
+                        ]).addTheme();
 
 const chopper = new Theme('Tony Tony Chopper', 
                         '/images/chopper.png', 
