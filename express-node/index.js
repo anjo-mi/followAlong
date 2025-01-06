@@ -4,6 +4,8 @@ const express = require('express');
 
 const app = express();
 
+app.use(express.json());
+
 
 let notes = [
     {
@@ -41,6 +43,16 @@ app.get('/api/notes/:id', (req,res) => {
         res.status(404).end();
     }
 })
+
+app.get('/api/notes', (req,res) => {
+    res.json(notes);
+});
+
+app.post('/api/notes', (req, res) => {
+    const note = req.body;
+    console.log(note);
+    res.json(note);
+});
 
 app.delete('/api/notes/:id', (req, res) => {
     const id = req.params.id;
