@@ -58,7 +58,7 @@ let notes = [
     return String(maxID + 1);
   };
 
-    app.post('/api/notes', (req, res) => {
+    app.post('/api/notes', morgan('tiny'), (req, res) => {
       const body = request.body;
 
       if (!body.content){
@@ -82,11 +82,7 @@ app.delete('/api/notes/:id', (req, res) => {
     res.status(204).end();
 })
 
-const unknownEndpoint = (req, res) => {
-    res.status(404).send({error: 'unknown endpoint'});
-}
 
-app.use(unknownEndpoint)
 
 const PORT = 9999;
 
